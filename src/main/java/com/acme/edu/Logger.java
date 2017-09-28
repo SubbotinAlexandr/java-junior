@@ -3,6 +3,7 @@ package com.acme.edu;
 import static com.acme.edu.Logger.logString;
 
 public class Logger {
+    public static int sum;
     /*
     Пишем свой логгер
      */
@@ -13,6 +14,7 @@ public class Logger {
     }
 
     private static void print(int message) {
+        sum = sum + message;
         System.out.println(primitive + message);
     }
 
@@ -31,6 +33,8 @@ public class Logger {
 
     public static void log(String message){
         System.out.println("string: " + message);
+        System.out.println(sum);
+        sum = 0;
     }
 
     public static void logString(String message){
@@ -38,7 +42,24 @@ public class Logger {
     }
 
     public static void main(String[] args) {
+        String i1 = new String("2");
+        String i2 = null;
+        //i2.equals("2");
+        switch (i1) {
+            case "2":
+                System.out.println("a");
+                break;
+            case "b":
+                System.out.println("a");
+                break;
+        }
+        if(1+Integer.MAX_VALUE > Integer.MAX_VALUE ){
+            System.out.println("shlyapa");
+        } else {
+            System.out.println("all ok!");
+        }
         System.out.println("Hello!!!");
         logString("Hw!!!!!");
+        System.out.println(Integer.MAX_VALUE + Integer.MIN_VALUE);
     }
 }
