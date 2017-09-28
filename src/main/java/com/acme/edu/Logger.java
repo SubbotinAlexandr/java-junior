@@ -4,6 +4,8 @@ import static com.acme.edu.Logger.logString;
 
 public class Logger {
     public static int sum;
+    public static int countMaxVal;
+    public static int countMinVal;
     /*
     Пишем свой логгер
      */
@@ -14,7 +16,33 @@ public class Logger {
     }
 
     private static void print(int message) {
-        sum = sum + message;
+        if(sum > 0 && message > 0 && (Integer.MAX_VALUE - message < sum) ) {
+            if(countMinVal > 0) {
+                countMinVal--;
+            } else {
+                countMaxVal++;
+            }
+            if(sum < message){
+                sum = message - sum;
+            } else {
+                sum = sum - message;
+            }
+        }
+        if( sum < 0 && message < 0 && (Integer.MIN_VALUE - message > sum)) {
+            if(countMaxVal > 0)
+            {
+                countMaxVal--;
+            }  else {
+                countMinVal++;
+            }
+            if(sum > message){
+                sum = sum - message;
+            } else {
+                sum = message - sum;
+            }
+        }
+        else
+            sum = sum + message;
         System.out.println(primitive + message);
     }
 

@@ -59,13 +59,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\r\n" +
-            "10\r\n" +
-            Integer.MAX_VALUE + "\r\n" +
-            "str 2\r\n" +
-            "0\r\n"
-        );
+        assertSysoutContains("str 1\r\n");
+        assertSysoutContains("10\r\n");
+        assertSysoutContains(Integer.MAX_VALUE  + "\r\n");
+        assertSysoutContains("str 2\r\n");
+        assertSysoutContains("0\r\n");
         //endregion
     }//Суммируем числа, как в прошлом тесте, но перед этим проверяем, не выходит ли за границы
     //Если не влезает, тогда надо вывести, что числа не влезает, что у нас нет переполнения
