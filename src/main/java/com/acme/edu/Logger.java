@@ -3,9 +3,12 @@ package com.acme.edu;
 import static com.acme.edu.Logger.logString;
 
 public class Logger {
-    public static int sum;
-    public static int countMaxVal;
-    public static int countMinVal;
+    private static int sum;
+    private static int countMaxVal;
+    private static int countMinVal;
+    private static int countRepeatString;
+    private static String prevMessage;
+    private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
     /*
     Пишем свой логгер
      */
@@ -13,6 +16,7 @@ public class Logger {
 
     public static void log(int message) {
         print(message);
+        state = 3;
     }
 
     private static void print(int message) {
@@ -44,22 +48,41 @@ public class Logger {
         else
             sum = sum + message;
         System.out.println(primitive + message);
+        if(state == 1)
+        {
+            System.out.println(prevMessage + " (x" + countRepeatString + ")");
+            countRepeatString = 0;
+        }
     }
 
     public static void log(byte message) {              //Также можно просто снести этот
         print(message);
+        if(state == 1)
+        {
+            System.out.println(prevMessage + "(x" + countRepeatString + ")");
+            countRepeatString = 0;
+        }
+        state = 2;
     }
 
     public static void log(boolean message)
     {
         System.out.println(message ? primitive + "true" : primitive + "false");
+        state = 6;
     }
 
     public static void log(char message){
         System.out.println("char: " + message);
+        state = 5;
     }
 
     public static void log(String message){
+        if(message != prevMessage) {
+            countRepeatString = 0;
+        }
+        countRepeatString++;
+        prevMessage = message;
+        state = 1;
         System.out.println("string: " + message);
         System.out.println(sum);
         sum = 0;
