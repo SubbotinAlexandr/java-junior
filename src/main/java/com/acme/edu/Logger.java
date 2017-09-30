@@ -1,5 +1,6 @@
 package com.acme.edu;
 
+
 public class Logger {
     private static int sum;
     private static int countMaxVal;
@@ -19,7 +20,7 @@ public class Logger {
         if(currentState != state) {
             switch (state) {
                 case 1:
-                    System.out.println(prevMessage + " (x" + countRepeatString + ")");
+                    Printer.print(prevMessage + " (x" + countRepeatString + ")");
                     countRepeatString = 0;
                     break;
             }
@@ -56,7 +57,7 @@ public class Logger {
         }
         else
             sum = sum + message;
-        System.out.println(primitive + message);
+        Printer.print(primitive + message);
     }
 
     public static void log(int message) {
@@ -73,13 +74,13 @@ public class Logger {
 
     public static void log(boolean message)
     {
-        System.out.println(message ? primitive + "true" : primitive + "false");
+        Printer.print(message ? primitive + "true" : primitive + "false");
         CheckChangeState(6);
         state = 6;
     }
 
     public static void log(char message){
-        System.out.println("char: " + message);
+        Printer.print("char: " + message);
         CheckChangeState(5);
         state = 5;
     }
@@ -92,7 +93,7 @@ public class Logger {
         prevMessage = message;
         CheckChangeState(1);
         state = 1;
-        System.out.println("string: " + message);
+        Printer.print("string: " + message);
         System.out.println(sum);
         sum = 0;
     }
@@ -103,11 +104,11 @@ public class Logger {
         for (int i = 0; i < message.length - 1; i++) {
             System.out.print(message[i] + ", ");
         }
-        System.out.println(message[message.length - 1] + "}");
+        Printer.print(message[message.length - 1] + "}");
     }
 
     private static void logString(String message){
-        System.out.println(message);
+        Printer.print(message);
     }
 
     public static void main(String[] args) {
