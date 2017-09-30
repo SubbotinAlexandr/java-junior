@@ -9,7 +9,11 @@ package com.acme.edu;
  * выставляет эту строку в единственном экземпляре с указанием количества, сколько раз встречалась эта строка.
  */
 public class Logger {
+    private static LoggerController loggerController;
     public static void log(int message) {
-
+        loggerController = new LoggerController(message);
+    }
+    public static void log(char message) {
+        System.out.println("char");
     }
 }

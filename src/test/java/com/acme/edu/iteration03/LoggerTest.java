@@ -1,6 +1,7 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
+import com.acme.edu.ProcedureLogger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -110,4 +111,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     */
+    @Test
+    public void shouldProcedureLogIntegersArray() throws IOException {
+        //region when
+        ProcedureLogger.log(new int[] {-1, 0, 1});
+        //endregion
+
+        //region then
+        assertSysoutContains("primitives array: {-1, 0, 1}");
+        //endregion
+    }
 }

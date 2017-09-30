@@ -2,7 +2,10 @@ package com.acme.edu;
 
 public class Accumulator {
     LoggerState typeAccumulator;
-    public Accumulator(boolean state) {
+    private final static void Accumulation () {
+
+    }
+    /*public Accumulator(boolean state) {
         typeAccumulator = LoggerState.booleanState;
     }
     public Accumulator(byte state) {
@@ -19,6 +22,6 @@ public class Accumulator {
     }
     public Accumulator(int [] state) {
         typeAccumulator = LoggerState.arrayIntState;
-    }
+    }*/
 
 }

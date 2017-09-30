@@ -1,6 +1,7 @@
 package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
+import com.acme.edu.ProcedureLogger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -105,4 +106,85 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     /**/
+    @Test
+    public void shouldProcedureLogSequentIntegersAsSum() throws IOException {
+        //region when
+        ProcedureLogger.log("str 1");
+        ProcedureLogger.log(1);
+        ProcedureLogger.log(2);
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log(0);
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains("3" + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains("0" + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldProcedureLogCorrectlyIntegerOverflowWhenSequentIntegers() {
+        //region when
+        ProcedureLogger.log("str 1");
+        ProcedureLogger.log(10);
+        ProcedureLogger.log(Integer.MAX_VALUE);
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log(0);
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains("10" + System.lineSeparator());
+        assertSysoutContains(Integer.MAX_VALUE + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains("0" + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldProcedureLogCorrectlyByteOverflowWhenSequentBytes() {
+        //region when
+        ProcedureLogger.log("str 1");
+        ProcedureLogger.log((byte)10);
+        ProcedureLogger.log((byte)11);
+        ProcedureLogger.log((byte)Byte.MAX_VALUE);
+        ProcedureLogger.log((byte)Byte.MAX_VALUE);
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log(0);
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains(Byte.MAX_VALUE + System.lineSeparator());
+        assertSysoutContains(Byte.MAX_VALUE + System.lineSeparator());
+        assertSysoutContains("10" + System.lineSeparator());
+        assertSysoutContains("str 3" + System.lineSeparator());
+        assertSysoutContains("0" + System.lineSeparator());
+        //endregion
+    }
+
+    @Test
+    public void shouldProcedureLogSameSubsequentStringsWithoutRepeat() throws IOException {
+        //region when
+        ProcedureLogger.log("str 1");
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log(0);
+        ProcedureLogger.log("str 2");
+        ProcedureLogger.log("str 3");
+        ProcedureLogger.log("str 3");
+        ProcedureLogger.log("str 3");
+        ProcedureLogger.FlushBuffer();
+        //endregion
+
+        //region then
+        assertSysoutContains("str 1" + System.lineSeparator());
+        assertSysoutContains("str 2 (x2)" + System.lineSeparator());
+        assertSysoutContains("0" + System.lineSeparator());
+        assertSysoutContains("str 2" + System.lineSeparator());
+        assertSysoutContains("str 3 (x3)" + System.lineSeparator());
+        //endregion
+    }
 }
