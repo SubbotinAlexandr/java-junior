@@ -5,6 +5,7 @@ public class ProcedureLogger {
     private static int sum;
     private static int countMaxVal;
     private static int countMinVal;
+    private static int countBorderVal;
     private static int countRepeatString;
     private static String prevMessage;
     private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
@@ -23,44 +24,39 @@ public class ProcedureLogger {
                     Printer.printToConsole(prevMessage + " (x" + countRepeatString + ")");
                     countRepeatString = 0;
                     break;
+                case 2:
+                    break;
             }
         }
     }
 
     private final static String primitive = "primitive: ";
 
+    private static boolean checkOverflow (Object message, Object BORDER_VALUE) {
+        long numBorder = Long.parseLong(BORDER_VALUE.toString());
+        int coefficient = numBorder < 0 ? -1 : 1;
+        numBorder = numBorder * coefficient;
+        long numMessage = coefficient * Long.parseLong(message.toString());
+        if ( sum * coefficient > 0 && numMessage > 0 && ( numBorder - numMessage < sum * coefficient) ) {
+            countBorderVal += coefficient < 0 ? -1 : 1;
+            return true;
+        }
+        return false;
+    }
+
+    private static void summOverflow (Object message, Object BORDER_VALUE) {
+        int numMessage = Integer.parseInt(message.toString());
+        if(checkOverflow(message, BORDER_VALUE))
+            sum = sum < numMessage ? numMessage - sum : sum - numMessage;
+        else sum = sum + numMessage;
+    }
+
     private static void print(int message) {
-        if(sum > 0 && message > 0 && (Integer.MAX_VALUE - message < sum) ) {
-            if(countMinVal > 0) {
-                countMinVal--;
-            } else {
-                countMaxVal++;
-            }
-            if(sum < message){
-                sum = message - sum;
-            } else {
-                sum = sum - message;
-            }
-        }
-        if( sum < 0 && message < 0 && (Integer.MIN_VALUE - message > sum)) {
-            if(countMaxVal > 0)
-            {
-                countMaxVal--;
-            }  else {
-                countMinVal++;
-            }
-            if(sum > message){
-                sum = sum - message;
-            } else {
-                sum = message - sum;
-            }
-        }
-        else
-            sum = sum + message;
         Printer.printToConsole(primitive + message);
     }
 
     public static void log(int message) {
+        summOverflow(message, message < 0 ? Integer.MIN_VALUE : Integer.MIN_VALUE);
         print(message);
         CheckChangeState(3);
         state = 3;
@@ -112,5 +108,11 @@ public class ProcedureLogger {
     }
 
     public static void main(String[] args) {
+        ProcedureLogger.log(1);
+        ProcedureLogger.log(2);
+        ProcedureLogger.log("str");
+        ProcedureLogger.log(2);
+        ProcedureLogger.log(2);
+        ProcedureLogger.FlushBuffer();
     }
 }
