@@ -3,13 +3,13 @@ package com.acme.edu;
 
 public class ProcedureLogger {
     private static int sum;
-    private static int countMaxVal;
-    private static int countMinVal;
     private static int countBorderVal;
     private static int countRepeatString;
     private static String prevMessage;
     private final static String primitiveType = "primitive: ";
     private final static String stringType = "string: ";
+    private final static String charType = "char: ";
+    private final static String arrayType = "primitives array: ";
     private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
     /*
     Пишем свой логгер
@@ -106,7 +106,7 @@ public class ProcedureLogger {
     }
 
     public static void log(char message){
-        Printer.printToConsole("char: " + message);
+        Printer.printToConsole(charType + message);
         CheckChangeState(5);
         state = 5;
     }
@@ -124,7 +124,7 @@ public class ProcedureLogger {
 
     public static void log(int [] message)
     {
-        System.out.print("primitives array: {");
+        System.out.print(arrayType + "{");
         for (int i = 0; i < message.length - 1; i++) {
             System.out.print(message[i] + ", ");
         }
@@ -136,9 +136,5 @@ public class ProcedureLogger {
     }
 
     public static void main(String[] args) {
-        ProcedureLogger.log("test string 1");
-        ProcedureLogger.log("other str");
-        ProcedureLogger.FlushBuffer();
-        System.out.println(Byte.MIN_VALUE);
     }
 }

@@ -10,18 +10,36 @@ package com.acme.edu;
  */
 public class Logger {
     private static LoggerController loggerController;
-    public static <T> void log(T message) {
-//        System.out.println(message);
-        loggerController = new LoggerController(message);
+    private static MetaMessage extendMessage;
+//    public static <T> void log(T message) {               //Незбывшаяся мечта
+//        loggerController = new LoggerController(message);
+//    }
+    public static void log(int message) {
+        extendMessage = new MetaMessage(message);
+    }
+    public static void log(byte message) {
+        extendMessage = new MetaMessage(message);
+    }
+    public static void log(char message) {
+        extendMessage = new MetaMessage(message);
+    }
+    public static void log(boolean message) {
+        extendMessage = new MetaMessage(message);
+    }
+    public static void log(String message) {
+        extendMessage = new MetaMessage(message);
+    }
+    public static void log(int [] message) {
+        extendMessage = new MetaMessage(message);
     }
         //
-public static void main(String[] args) {
-    Logger.log(3);
-    Logger.log((byte)3);
-    Logger.log("str");
-    Logger.log('c');
-    int test[] = {1,2,3};
-    Logger.log(test);
-}
+    public static void main(String[] args) {
+        Logger.log(3);
+        Logger.log((byte)3);
+        Logger.log("str");
+        Logger.log('c');
+        int test[] = {1,2,3};
+        Logger.log(test);
+    }
 
 }

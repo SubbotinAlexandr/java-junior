@@ -1,12 +1,16 @@
 package com.acme.edu;
 
 public class MetaMessage {
-    private Object messageContent;
-    private LoggerState typeMessage;
+    public Object messageContent;
+    public LoggerState typeMessage;
     MetaMessage newMsg;
     public MetaMessage(byte message) {
         messageContent = message;
         typeMessage = LoggerState.byteState;
+    }
+    public MetaMessage(int message) {
+        messageContent = message;
+        typeMessage = LoggerState.intState;
     }
     public MetaMessage(boolean message) {
         messageContent = message;
@@ -22,6 +26,11 @@ public class MetaMessage {
     }
     public MetaMessage(int [] message) {
         messageContent = message;
+        typeMessage = LoggerState.arrayIntState;
+    }
+    public MetaMessage(Object message) {                  //Также несбывшаяся мечта!
+        messageContent = message.toString();
+        System.out.println("msg: " + message.getClass());
         typeMessage = LoggerState.arrayIntState;
     }
     public Object getMessage (MetaMessage message) {
