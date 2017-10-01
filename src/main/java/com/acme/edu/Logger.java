@@ -10,10 +10,18 @@ package com.acme.edu;
  */
 public class Logger {
     private static LoggerController loggerController;
-    public static void log(int message) {
+    public static <T> void log(T message) {
+//        System.out.println(message);
         loggerController = new LoggerController(message);
     }
-    public static void log(char message) {
-        System.out.println("char");
-    }
+        //
+public static void main(String[] args) {
+    Logger.log(3);
+    Logger.log((byte)3);
+    Logger.log("str");
+    Logger.log('c');
+    int test[] = {1,2,3};
+    Logger.log(test);
+}
+
 }

@@ -8,11 +8,14 @@ public class LoggerController {
    // private final Accumulator stringAccumulator;
    // private final Accumulator arrayAccumulator;
    // private final Accumulator booleanAccumulator;
-    public LoggerController(int message) {
-        System.out.println(message);
-        if (currenStateLogger.equals(LoggerState.intState)) {
-            System.out.println("Предыдущее значение было интом: " + message);
-        }
-        currenStateLogger = LoggerState.intState;
+    public LoggerController(Object arg) {
+        System.out.println("test");
+        System.out.println("arg: " + arg.getClass() );
+        //System.out.println("TypeMsg: " + message.getTypeMessage(message) + System.lineSeparator() + "ContentMsg: " + message.getMessage(message));
+//        System.out.println(message);
+//        if (currenStateLogger.equals(LoggerState.intState)) {
+//            System.out.println("Предыдущее значение было интом: " + message);
+//        }
+//        currenStateLogger = LoggerState.intState;
     }
 }
