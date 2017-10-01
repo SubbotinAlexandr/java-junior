@@ -185,6 +185,7 @@ public void shouldProcedureLogInteger() throws IOException {
         //region when
         ProcedureLogger.log("test string 1");
         ProcedureLogger.log("other str");
+        ProcedureLogger.FlushBuffer();
         //endregion
 
         //region then

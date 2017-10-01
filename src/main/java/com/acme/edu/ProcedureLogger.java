@@ -8,6 +8,8 @@ public class ProcedureLogger {
     private static int countBorderVal;
     private static int countRepeatString;
     private static String prevMessage;
+    private final static String primitiveType = "primitive: ";
+    private final static String stringType = "string: ";
     private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
     /*
     Пишем свой логгер
@@ -21,20 +23,35 @@ public class ProcedureLogger {
         if(currentState != state) {
             switch (state) {
                 case 1:
-                    Printer.printToConsole(prevMessage + " (x" + countRepeatString + ")");
+                    prevMessage =  stringType + prevMessage;
+                    if(countRepeatString > 1)
+                        prevMessage = prevMessage + " (x" + countRepeatString + ")";
+                    Printer.printToConsole(prevMessage);
                     countRepeatString = 0;
                     break;
                 case 2:
+                    while (countBorderVal != 0) {
+                        System.out.println(countBorderVal < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE);
+                        countBorderVal = countBorderVal < 0 ? countBorderVal + 1 : countBorderVal - 1;
+                    }
+                    Printer.printToConsole("" + sum);
+                    break;
+                case 3:
+                    while (countBorderVal != 0) {
+                        System.out.println(countBorderVal < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
+                        countBorderVal = countBorderVal < 0 ? countBorderVal + 1 : countBorderVal - 1;
+                    }
+                    Printer.printToConsole("" + sum);
                     break;
             }
         }
     }
 
-    private final static String primitive = "primitive: ";
 
-    private static boolean checkOverflow (Object message, Object BORDER_VALUE) {
+
+    private static boolean checkOverflow (Object message, Object BORDER_VALUE, int coefficient) {
         long numBorder = Long.parseLong(BORDER_VALUE.toString());
-        int coefficient = numBorder < 0 ? -1 : 1;
+
         numBorder = numBorder * coefficient;
         long numMessage = coefficient * Long.parseLong(message.toString());
         if ( sum * coefficient > 0 && numMessage > 0 && ( numBorder - numMessage < sum * coefficient) ) {
@@ -46,31 +63,44 @@ public class ProcedureLogger {
 
     private static void summOverflow (Object message, Object BORDER_VALUE) {
         int numMessage = Integer.parseInt(message.toString());
-        if(checkOverflow(message, BORDER_VALUE))
-            sum = sum < numMessage ? numMessage - sum : sum - numMessage;
-        else sum = sum + numMessage;
+        int numBorder = Integer.parseInt(BORDER_VALUE.toString());
+        int coefficient = numBorder < 0 ? -1 : 1;
+        if(checkOverflow(message, BORDER_VALUE, coefficient)) {
+            sum = sum * coefficient < numMessage * coefficient ? numMessage - numBorder + sum  : sum - numBorder + numMessage ;
+        }
+        else {
+            if ((sum + numMessage > 0) && countBorderVal < 0) {
+                sum = sum + numBorder - numMessage;
+                countBorderVal++;
+            } else if ((sum + numMessage < 0) && countBorderVal > 0) {
+                sum = sum + numBorder - numMessage;
+                countBorderVal--;
+            }
+            else  sum = sum + numMessage;
+        }
     }
 
     private static void print(int message) {
-        Printer.printToConsole(primitive + message);
+        Printer.printToConsole(primitiveType + message);
     }
 
     public static void log(int message) {
-        summOverflow(message, message < 0 ? Integer.MIN_VALUE : Integer.MIN_VALUE);
-        print(message);
+        summOverflow(message, message < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
         CheckChangeState(3);
+        print(message);
         state = 3;
     }
 
     public static void log(byte message) {              //Также можно просто снести этот
-        print(message);
+        summOverflow(message, message < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE);
         CheckChangeState(2);
+        print(message);
         state = 2;
     }
 
     public static void log(boolean message)
     {
-        Printer.printToConsole(message ? primitive + "true" : primitive + "false");
+        Printer.printToConsole(message ? primitiveType + "true" : primitiveType + "false");
         CheckChangeState(6);
         state = 6;
     }
@@ -83,15 +113,13 @@ public class ProcedureLogger {
 
     public static void log(String message){
         if(!message.equals(prevMessage)) {
+            FlushBuffer();
             countRepeatString = 0;
         }
         countRepeatString++;
         prevMessage = message;
         CheckChangeState(1);
         state = 1;
-        Printer.printToConsole("string: " + message);
-        System.out.println(sum);
-        sum = 0;
     }
 
     public static void log(int [] message)
@@ -108,11 +136,9 @@ public class ProcedureLogger {
     }
 
     public static void main(String[] args) {
-        ProcedureLogger.log(1);
-        ProcedureLogger.log(2);
-        ProcedureLogger.log("str");
-        ProcedureLogger.log(2);
-        ProcedureLogger.log(2);
+        ProcedureLogger.log("test string 1");
+        ProcedureLogger.log("other str");
         ProcedureLogger.FlushBuffer();
+        System.out.println(Byte.MIN_VALUE);
     }
 }
