@@ -9,37 +9,19 @@ package com.acme.edu;
  * выставляет эту строку в единственном экземпляре с указанием количества, сколько раз встречалась эта строка.
  */
 public class Logger {
-    private static LoggerController loggerController;
-    private static MetaMessage extendMessage;
-//    public static <T> void log(T message) {               //Незбывшаяся мечта
-//        loggerController = new LoggerController(message);
-//    }
+    public static MetaMessage message;
+    public static LoggerController controller;
     public static void log(int message) {
-        extendMessage = new MetaMessage(message);
-    }
-    public static void log(byte message) {
-        extendMessage = new MetaMessage(message);
-    }
-    public static void log(char message) {
-        extendMessage = new MetaMessage(message);
-    }
-    public static void log(boolean message) {
-        extendMessage = new MetaMessage(message);
-    }
-    public static void log(String message) {
-        extendMessage = new MetaMessage(message);
-    }
-    public static void log(int [] message) {
-        extendMessage = new MetaMessage(message);
-    }
-        //
-    public static void main(String[] args) {
-        Logger.log(3);
-        Logger.log((byte)3);
-        Logger.log("str");
-        Logger.log('c');
-        int test[] = {1,2,3};
-        Logger.log(test);
+        Logger.message = new IntMessage(message);
+        controller = new LoggerController(Logger.message);
+        controller.getBuff();
+        //System.out.println("Ok" + Logger.message.getContent());
     }
 
+    public static void main(String[] args) {
+        MetaMessage msg;
+        Logger.log(3);
+        Logger.log(5);
+        Logger.log(6);
+    }
 }
