@@ -20,8 +20,16 @@ public class Logger {
 
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log(3);
-        Logger.log(5);
+        Logger.log(-3);
+        Logger.log(-5);
+        Logger.log(-6);
+        Logger.log(Integer.MAX_VALUE);
         Logger.log(6);
+        Logger.log(5);
+        Logger.log(4);
+        System.out.println(Integer.MAX_VALUE);
+        //Logger.log(-1);
+        //Logger.log(Integer.MIN_VALUE);
+        //Logger.log(Integer.MIN_VALUE);
     }
 }
