@@ -1,7 +1,7 @@
 package com.acme.edu;
 
 public class LoggerController {
-    private static LoggerState currenStateLogger = LoggerState.noneState;
+    private static LoggerState CURRENT_STATE_LOGGER = LoggerState.noneState;
     private MetaMessage message;
    // private final Accumulator byteAccumulator;
    // private final Accumulator charAccumulator;
