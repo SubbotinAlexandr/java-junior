@@ -10,33 +10,34 @@ public class ProcedureLogger {
     private final static String stringType = "string: ";
     private final static String charType = "char: ";
     private final static String arrayType = "primitives array: ";
-    private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
+    //private static byte state; // 0 - none, 1 - string, 2 - byte, 3 - int, 4 - array, 5 - char, 6 - boolean
+    private static LoggerState state = LoggerState.noneState;
     /*
     Пишем свой логгер
      */
     public static void FlushBuffer()
     {
-        CheckChangeState(0);
+        CheckChangeState(LoggerState.noneState);
     }
 
-    private static void CheckChangeState(int currentState) {
+    private static void CheckChangeState(LoggerState currentState) {
         if(currentState != state) {
             switch (state) {
-                case 1:
+                case stringState:
                     prevMessage =  stringType + prevMessage;
                     if(countRepeatString > 1)
                         prevMessage = prevMessage + " (x" + countRepeatString + ")";
                     Printer.printToConsole(prevMessage);
                     countRepeatString = 0;
                     break;
-                case 2:
+                case byteState:
                     while (countBorderVal != 0) {
                         System.out.println(countBorderVal < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE);
                         countBorderVal = countBorderVal < 0 ? countBorderVal + 1 : countBorderVal - 1;
                     }
                     Printer.printToConsole("" + sum);
                     break;
-                case 3:
+                case intState:
                     while (countBorderVal != 0) {
                         System.out.println(countBorderVal < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
                         countBorderVal = countBorderVal < 0 ? countBorderVal + 1 : countBorderVal - 1;
@@ -86,29 +87,29 @@ public class ProcedureLogger {
 
     public static void log(int message) {
         summOverflow(message, message < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
-        CheckChangeState(3);
+        CheckChangeState(LoggerState.intState);
         print(message);
-        state = 3;
+        state = LoggerState.intState;
     }
 
     public static void log(byte message) {              //Также можно просто снести этот
         summOverflow(message, message < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE);
-        CheckChangeState(2);
+        CheckChangeState(LoggerState.byteState);
         print(message);
-        state = 2;
+        state = LoggerState.byteState;
     }
 
     public static void log(boolean message)
     {
         Printer.printToConsole(message ? primitiveType + "true" : primitiveType + "false");
-        CheckChangeState(6);
-        state = 6;
+        CheckChangeState(LoggerState.booleanState);
+        state = LoggerState.booleanState;
     }
 
     public static void log(char message){
         Printer.printToConsole(charType + message);
-        CheckChangeState(5);
-        state = 5;
+        CheckChangeState(LoggerState.charState);
+        state = LoggerState.charState;
     }
 
     public static void log(String message){
@@ -118,8 +119,8 @@ public class ProcedureLogger {
         }
         countRepeatString++;
         prevMessage = message;
-        CheckChangeState(1);
-        state = 1;
+        CheckChangeState(LoggerState.stringState);
+        state = LoggerState.stringState;
     }
 
     public static void log(int [] message)
