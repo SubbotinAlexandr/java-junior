@@ -33,7 +33,7 @@ public class IntMessage implements MetaMessage {
             System.out.println(Formatter.getFormatMessage(message));
             return;
         }
-        System.out.println("int " + Formatter.getFormatMessage(message));
+        System.out.println(Formatter.getFormatMessage(message));
         //System.out.println("_" + Formatter.getFormatMessage(this) + " " + this.content);
         //System.out.println("PrevMSG:" + this.content + " MSG:" + ((IntMessage)message).content + " ");
         this.numBorder = this.content < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;

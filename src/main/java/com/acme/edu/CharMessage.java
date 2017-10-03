@@ -6,10 +6,15 @@ public class CharMessage implements MetaMessage {
         return "";
     }
     public void filter(MetaMessage message) {
-        System.out.println(Formatter.getFormatMessage(this));
+        if(!(message instanceof CharMessage)) {
+            this.flushBuffer();
+            System.out.println(Formatter.getFormatMessage(message));
+            return;
+        }
+        System.out.println(Formatter.getFormatMessage(message));
     }
     public void flushBuffer() {
-        filter(this);
+        return;
     }
     public CharMessage (char message) {
         this.content = message;

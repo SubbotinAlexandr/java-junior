@@ -39,12 +39,21 @@ public class Logger {
     }
     public static void main(String[] args) {
         MetaMessage msg;
+        Logger.log('a');
+        Logger.log('b');
+        Logger.log('c');
         Logger.log((byte)2);
         Logger.log((byte)3);
         Logger.log((byte)4);
         Logger.log((byte)1);
         Logger.log(5);
         Logger.log(6);
+        Logger.log(Integer.MAX_VALUE-2147483647);
+        Logger.log(-1);
+        Logger.log('a');
+        Logger.log('b');
+        Logger.log(1);
+        Logger.log(2);
         Logger.close();
         //Logger.close();
         //Logger.log(1);
