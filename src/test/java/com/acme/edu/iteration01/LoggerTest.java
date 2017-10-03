@@ -91,12 +91,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
              //region when
              Logger.log(true);
              Logger.log(false);
+             Logger.close();
              //endregion
 
              //region then
              assertSysoutContains("primitive: ");
              assertSysoutContains("true");
              assertSysoutContains("false");
+             //assertSysoutContains("false");
+
              //endregion
          }
          /*

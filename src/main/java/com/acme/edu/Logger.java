@@ -46,12 +46,14 @@ public class Logger {
     }
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log(false);
-        Logger.log(true);
-        Logger.log("other str");
-        Logger.log(false);
-        Logger.log(false);
-        Logger.log(true);
+        Logger.log("str 1");
+        Logger.log("str 2");
+        Logger.log("str 2");
+        Logger.log(0);
+        Logger.log("str 2");
+        Logger.log("str 3");
+        Logger.log("str 3");
+        Logger.log("str 3");
         Logger.close();
     }
 }
