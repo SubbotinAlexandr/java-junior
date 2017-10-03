@@ -25,8 +25,6 @@ public class LoggerController {
             this.message.filter(message);
         }
         this.message = message;
-
-
     }
 
     public void getBuff () {

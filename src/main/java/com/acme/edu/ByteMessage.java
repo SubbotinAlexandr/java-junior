@@ -1,6 +1,6 @@
 package com.acme.edu;
 
-public class ByteMessage implements MetaMessage{
+public class ByteMessage implements MetaMessage {
     int content;
     int prevContent;
     int coefficient;

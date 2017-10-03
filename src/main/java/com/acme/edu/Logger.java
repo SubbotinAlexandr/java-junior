@@ -32,6 +32,11 @@ public class Logger {
         controller.getBuff();
         //System.out.println("Ok" + Logger.message.getContent());
     }
+    public static void log(Boolean message) {
+        controller.setController(new BooleanMessage(message));
+        controller.getBuff();
+        //System.out.println("Ok" + Logger.message.getContent());
+    }
     public static void close() {
         controller.flushBuffer();
     }
@@ -41,16 +46,12 @@ public class Logger {
     }
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log(3);
-        Logger.log(3);
-        Logger.log(3);
-        Logger.log("test string 1");
-        Logger.log((byte)3);
-        Logger.log((byte)3);
-        Logger.log((byte)3);
+        Logger.log(false);
+        Logger.log(true);
         Logger.log("other str");
-        Logger.log("other str1");
-        Logger.log("other str");
+        Logger.log(false);
+        Logger.log(false);
+        Logger.log(true);
         Logger.close();
     }
 }
