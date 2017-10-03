@@ -1,7 +1,8 @@
 package com.acme.edu;
 
 public interface MetaMessage {
-    void setContent(int message);
-    int getContent();
+    //void setContent();
+    String getContent();
     void filter(MetaMessage message);
+    void flushBuffer();
 }

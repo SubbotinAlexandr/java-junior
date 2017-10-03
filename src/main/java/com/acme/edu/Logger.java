@@ -9,24 +9,28 @@ package com.acme.edu;
  * выставляет эту строку в единственном экземпляре с указанием количества, сколько раз встречалась эта строка.
  */
 public class Logger {
-    public static MetaMessage message;
     public static LoggerController controller;
     public static void log(int message) {
-        Logger.message = new IntMessage(message);
-        controller = new LoggerController(Logger.message);
+        controller = new LoggerController(new IntMessage(message));
+        controller.getBuff();
+        //System.out.println("Ok" + Logger.message.getContent());
+    }
+    public static void log(String message) {
+        controller = new LoggerController(new StringMessage(message));
         controller.getBuff();
         //System.out.println("Ok" + Logger.message.getContent());
     }
 
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log(-3);
-        Logger.log(-5);
+        Logger.log(1);
+        Logger.log(Integer.MIN_VALUE);
         Logger.log(-6);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log(6);
-        Logger.log(5);
-        Logger.log(4);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(Integer.MIN_VALUE);
+        Logger.log(-8);
+        Logger.log("123");
         System.out.println(Integer.MAX_VALUE);
         //Logger.log(-1);
         //Logger.log(Integer.MIN_VALUE);

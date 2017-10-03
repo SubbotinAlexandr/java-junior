@@ -4,8 +4,8 @@ public class IntAccumulator implements Accumulator {
     int message;
     int borderValue;
     public void additition (MetaMessage message, MetaMessage borderValue) {
-        LoggerController.message.setContent(LoggerController.message.getContent() + message.getContent());
-        this.borderValue = borderValue.getContent();
+       // LoggerController.message.setContent(LoggerController.message.getContent() + message.getContent());
+        //this.borderValue = borderValue.getContent();
     }
 
 //    private static boolean checkOverflow (int message, int BORDER_VALUE, int coefficient) {
