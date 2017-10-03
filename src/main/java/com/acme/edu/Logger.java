@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import sun.rmi.runtime.Log;
+
 /**
  * Класс Logger призван логгировать сообщения, при этом он должен суммировать одинаковые типы данных,
  *      в случае с численными типами - подаем на принтер, в добавок складываем, при смене типа, выводим результат, если
@@ -39,27 +41,16 @@ public class Logger {
     }
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log('a');
-        Logger.log('b');
-        Logger.log('c');
-        Logger.log((byte)2);
+        Logger.log(3);
+        Logger.log(3);
+        Logger.log(3);
+        Logger.log("test string 1");
         Logger.log((byte)3);
-        Logger.log((byte)4);
-        Logger.log((byte)1);
-        Logger.log(5);
-        Logger.log(6);
-        Logger.log(Integer.MAX_VALUE-2147483647);
-        Logger.log(-1);
-        Logger.log('a');
-        Logger.log('b');
-        Logger.log(1);
-        Logger.log(2);
+        Logger.log((byte)3);
+        Logger.log((byte)3);
+        Logger.log("other str");
+        Logger.log("other str1");
+        Logger.log("other str");
         Logger.close();
-        //Logger.close();
-        //Logger.log(1);
-        //Logger.log('c');
-        //Logger.log(-1);
-        //Logger.log(Integer.MIN_VALUE);
-        //Logger.log(Integer.MIN_VALUE);
     }
 }

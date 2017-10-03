@@ -2,6 +2,7 @@ package com.acme.edu;
 
 public class IntMessage implements MetaMessage {
     int content;
+    int sum;
     int prevContent;
     int coefficient;
     int countBorderVal;
@@ -25,21 +26,24 @@ public class IntMessage implements MetaMessage {
 
     public void filter(MetaMessage message) {
         if(!(message instanceof IntMessage)) {
-            flushBuffer();
-            System.out.println(Formatter.getFormatMessage(message));
+            this.flushBuffer();
+            message.filter(message);
+            //message.flushBuffer();
+            //System.out.println("!instance: " + Formatter.getFormatMessage(message));
             return;
         }
         if(message == this) {
             System.out.println(Formatter.getFormatMessage(message));
+            ((IntMessage) message).sum = this.content;
             return;
         }
         System.out.println(Formatter.getFormatMessage(message));
         //System.out.println("_" + Formatter.getFormatMessage(this) + " " + this.content);
         //System.out.println("PrevMSG:" + this.content + " MSG:" + ((IntMessage)message).content + " ");
         this.numBorder = this.content < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-        this.coefficient = this.content < 0 ? -1 : 1;
+        this.coefficient = this.sum < 0 ? -1 : 1;
         summOverflow(((IntMessage)message).content, this.numBorder);
-        ((IntMessage) message).content = this.content;
+        ((IntMessage) message).sum = this.sum;
         ((IntMessage) message).countBorderVal = this.countBorderVal;
 
         //System.out.println("summ = " + ((IntMessage) message).content + System.lineSeparator() + "numBorder: " + this.countBorderVal);
@@ -52,24 +56,24 @@ public class IntMessage implements MetaMessage {
             System.out.println(this.numBorder);
             this.countBorderVal += this.coefficient;
         }
-        System.out.println(this.content);
+        System.out.println(this.sum);
 
     }
 
     private void summOverflow (int message, int BORDER_VALUE) {
         this.coefficient = message < 0 ? -1 : 1;
         if(checkOverflow((long)message, (long)BORDER_VALUE, coefficient)) {
-            this.content = this.content * coefficient < message * coefficient ? message - BORDER_VALUE + this.content  : this.content - BORDER_VALUE + message ;
+            this.sum = this.sum * coefficient < message * coefficient ? message - BORDER_VALUE + this.sum  : this.sum - BORDER_VALUE + message ;
         }
         else {
-            if ((this.content + message > 0) && countBorderVal < 0) {
-                this.content = this.content + BORDER_VALUE - message;
+            if ((this.sum + message > 0) && countBorderVal < 0) {
+                this.sum = this.sum + BORDER_VALUE - message;
                 countBorderVal++;
-            } else if ((this.content + message < 0) && countBorderVal > 0) {
-                this.content = this.content + BORDER_VALUE - message;
+            } else if ((this.sum + message < 0) && countBorderVal > 0) {
+                this.sum = this.sum + BORDER_VALUE - message;
                 countBorderVal--;
             }
-            else  this.content = this.content + message;
+            else  this.sum = this.sum + message;
         }
     }
 
