@@ -1,17 +1,16 @@
 package com.acme.edu;
 
-public class IntMessage implements MetaMessage {
+public class ByteMessage implements MetaMessage{
     int content;
     int prevContent;
     int coefficient;
     int countBorderVal;
     int numBorder;
-    IntMessage newContent;
+    ByteMessage newContent;
 
-    public IntMessage (int message) {
+    public ByteMessage (byte message) {
         this.prevContent = this.content;
         this.content = message;
-
 
         //System.out.println("prev.content" + this.prevContent);
     }
@@ -24,8 +23,8 @@ public class IntMessage implements MetaMessage {
     }
 
     public void filter(MetaMessage message) {
-        if(!(message instanceof IntMessage)) {
-            flushBuffer();
+        if(!(message instanceof ByteMessage)) {
+            this.flushBuffer();
             System.out.println(Formatter.getFormatMessage(message));
             return;
         }
@@ -33,27 +32,25 @@ public class IntMessage implements MetaMessage {
             System.out.println(Formatter.getFormatMessage(message));
             return;
         }
-        System.out.println("int " + Formatter.getFormatMessage(message));
-        //System.out.println("_" + Formatter.getFormatMessage(this) + " " + this.content);
-        //System.out.println("PrevMSG:" + this.content + " MSG:" + ((IntMessage)message).content + " ");
-        this.numBorder = this.content < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        System.out.println(Formatter.getFormatMessage(message));
+        //System.out.print("PrevMSG:" + this.content + " MSG:" + ((ByteMessage)message).content + " ");
+        this.numBorder = this.content < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         this.coefficient = this.content < 0 ? -1 : 1;
-        summOverflow(((IntMessage)message).content, this.numBorder);
-        ((IntMessage) message).content = this.content;
-        ((IntMessage) message).countBorderVal = this.countBorderVal;
+        summOverflow(((ByteMessage)message).content, this.numBorder);
+        ((ByteMessage) message).content = this.content;
+        ((ByteMessage) message).countBorderVal = this.countBorderVal;
 
-        //System.out.println("summ = " + ((IntMessage) message).content + System.lineSeparator() + "numBorder: " + this.countBorderVal);
+        //System.out.println("summ = " + ((ByteMessage) message).content + System.lineSeparator() + "numBorder: " + this.countBorderVal);
     }
 
     public void flushBuffer() {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;
-        this.numBorder = this.countBorderVal < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        this.numBorder = this.countBorderVal < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         while (this.countBorderVal!=0) {
             System.out.println(this.numBorder);
             this.countBorderVal += this.coefficient;
         }
         System.out.println(this.content);
-
     }
 
     private void summOverflow (int message, int BORDER_VALUE) {
@@ -84,5 +81,4 @@ public class IntMessage implements MetaMessage {
             return false;
         }
     }
-
 }

@@ -9,29 +9,46 @@ package com.acme.edu;
  * выставляет эту строку в единственном экземпляре с указанием количества, сколько раз встречалась эта строка.
  */
 public class Logger {
-    public static LoggerController controller;
+    public static LoggerController controller = new LoggerController();
     public static void log(int message) {
-        controller = new LoggerController(new IntMessage(message));
+        controller.setController(new IntMessage(message));
+        controller.getBuff();
+        //System.out.println("Ok" + Logger.message.getContent());
+    }
+    public static void log(byte message) {
+        controller.setController(new ByteMessage(message));
+        controller.getBuff();
+        //System.out.println("Ok" + Logger.message.getContent());
+    }
+    public static void log(char message) {
+        controller.setController(new CharMessage(message));
         controller.getBuff();
         //System.out.println("Ok" + Logger.message.getContent());
     }
     public static void log(String message) {
-        controller = new LoggerController(new StringMessage(message));
+        controller.setController(new StringMessage(message));
         controller.getBuff();
         //System.out.println("Ok" + Logger.message.getContent());
     }
+    public static void close() {
+        controller.flushBuffer();
+    }
 
+    void getBuff() {
+
+    }
     public static void main(String[] args) {
         MetaMessage msg;
-        Logger.log(1);
-        Logger.log(Integer.MIN_VALUE);
-        Logger.log(-6);
-        Logger.log(Integer.MIN_VALUE);
-        Logger.log(Integer.MIN_VALUE);
-        Logger.log(Integer.MIN_VALUE);
-        Logger.log(-8);
-        Logger.log("123");
-        System.out.println(Integer.MAX_VALUE);
+        Logger.log((byte)2);
+        Logger.log((byte)3);
+        Logger.log((byte)4);
+        Logger.log((byte)1);
+        Logger.log(5);
+        Logger.log(6);
+        Logger.close();
+        //Logger.close();
+        //Logger.log(1);
+        //Logger.log('c');
         //Logger.log(-1);
         //Logger.log(Integer.MIN_VALUE);
         //Logger.log(Integer.MIN_VALUE);

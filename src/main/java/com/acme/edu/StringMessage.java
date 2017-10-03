@@ -1,6 +1,11 @@
 package com.acme.edu;
 
 public class StringMessage implements MetaMessage {
+    String content;
+    String prevContent;
+    String coefficient;
+    String countBorderVal;
+
     public StringMessage(String message) {
 
     }
