@@ -14,26 +14,26 @@ package com.acme.edu;
 public class Logger {
     private static LoggerController controller = new LoggerController();
     public static void log(int message) {
-        controller.setMessage(new IntMessage(message));
+        controller.processMessage(new IntMessage(message));
     }
     public static void log(byte message) {
-        controller.setMessage(new ByteMessage(message));
+        controller.processMessage(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        controller.setMessage(new CharMessage(message));
+        controller.processMessage(new CharMessage(message));
     }
 
     public static void log(String message) {
-        controller.setMessage(new StringMessage(message));
+        controller.processMessage(new StringMessage(message));
     }
 
     public static void log(Boolean message) {
-        controller.setMessage(new BooleanMessage(message));
+        controller.processMessage(new BooleanMessage(message));
     }
 
     public static void log(int[] message) {
-        controller.setMessage(new IntArrayMessage(message));
+        controller.processMessage(new IntArrayMessage(message));
     }
 
     public static void close() {

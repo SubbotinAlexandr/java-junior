@@ -17,7 +17,7 @@ public class StringMessage implements MetaMessage {
             return;
         }
         if (this.content.equals(((StringMessage) message).content) && this != message) {
-            ((StringMessage) message).countRepeat = this.countRepeat+1;
+            ((StringMessage) message).countRepeat = this.countRepeat + 1;
         } else if (message != this) {
             this.flushBuffer();
         }
