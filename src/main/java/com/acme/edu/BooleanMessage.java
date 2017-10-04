@@ -2,9 +2,11 @@ package com.acme.edu;
 
 public class BooleanMessage implements MetaMessage {
     public boolean content;
+
     public BooleanMessage(boolean message) {
         this.content = message;
     }
+
     @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof BooleanMessage)) {
@@ -14,6 +16,7 @@ public class BooleanMessage implements MetaMessage {
             this.flushBuffer();
         }
     }
+
     @Override
     public void flushBuffer() {
         printer.print(Formatter.getFormatMessage(this));

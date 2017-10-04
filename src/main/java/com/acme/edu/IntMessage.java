@@ -15,6 +15,7 @@ public class IntMessage implements MetaMessage {
     public IntMessage(int message) {
         this.content = message;
     }
+
     @Override
     public void filter(MetaMessage message) {
         if (!(message instanceof IntMessage)) {
@@ -34,6 +35,7 @@ public class IntMessage implements MetaMessage {
         ((IntMessage) message).sum = this.sum;
         ((IntMessage) message).countBorderVal = this.countBorderVal;
     }
+
     @Override
     public void flushBuffer() {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;

@@ -9,6 +9,7 @@ package com.acme.edu;
  */
 public class LoggerController {
     private MetaMessage message;
+
     public void setController(MetaMessage message) {
         if(this.message == null && message != null) {
             message.filter(message);

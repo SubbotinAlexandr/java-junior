@@ -2,9 +2,11 @@ package com.acme.edu;
 
 public class CharMessage implements MetaMessage {
     char content;
+
     public CharMessage(char message) {
         this.content = message;
     }
+
     @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof CharMessage)) {
@@ -14,6 +16,7 @@ public class CharMessage implements MetaMessage {
         }
         printer.print(Formatter.getFormatMessage(message));
     }
+
     @Override
     public void flushBuffer() {
         return;

@@ -19,18 +19,23 @@ public class Logger {
     public static void log(byte message) {
         controller.setController(new ByteMessage(message));
     }
+
     public static void log(char message) {
         controller.setController(new CharMessage(message));
     }
+
     public static void log(String message) {
         controller.setController(new StringMessage(message));
     }
+
     public static void log(Boolean message) {
         controller.setController(new BooleanMessage(message));
     }
+
     public static void log(int[] message) {
         controller.setController(new IntArrayMessage(message));
     }
+
     public static void close() {
         controller.flushBuffer();
     }

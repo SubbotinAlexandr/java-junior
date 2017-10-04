@@ -7,12 +7,12 @@ public class ByteMessage implements MetaMessage {
     int countBorderVal;
     int numBorder;
     int sum;
-    ByteMessage newContent;
 
     public ByteMessage (byte message) {
         this.prevContent = this.content;
         this.content = message;
     }
+
     @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof ByteMessage)) {
@@ -32,6 +32,7 @@ public class ByteMessage implements MetaMessage {
         ((ByteMessage) message).sum = this.sum;
         ((ByteMessage) message).countBorderVal = this.countBorderVal;
     }
+
     @Override
     public void flushBuffer() {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;
