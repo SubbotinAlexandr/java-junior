@@ -1,13 +1,16 @@
 package com.acme.edu;
 
-public class BooleanMessage implements MetaMessage {
-    public boolean content;
-    public BooleanMessage(boolean message) {
-        this.content = message;
+public class IntArrayMessage implements MetaMessage {
+    int [] content;
+    public IntArrayMessage(int[] message) {
+            content = message;
     }
 
+    public String getContent() {
+        return "";
+    }
     public void filter(MetaMessage message) {
-        if(!(message instanceof BooleanMessage)) {
+        if(!(message instanceof IntArrayMessage)) {
             this.flushBuffer();
             message.filter(message);
             return;

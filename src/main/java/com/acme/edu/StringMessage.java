@@ -11,9 +11,6 @@ public class StringMessage implements MetaMessage {
         this.content = message;
     }
 
-    //    public void setContent() {
-//
-//    }
     public String getContent() {
         return "123";
     }

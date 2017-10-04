@@ -4,6 +4,7 @@ public class Formatter {
     private static String PRIMITIVE = "primitive: ";
     private static String CHAR = "char: ";
     private static String STRING = "string: ";
+    private static String PRIMITIVES_ARRAY = "primitives array: ";
     public static String getFormatMessage(MetaMessage message) {
         if (message instanceof IntMessage) {
             return Formatter.PRIMITIVE + ((IntMessage) message).content;
@@ -19,8 +20,19 @@ public class Formatter {
             }
         } else if (message instanceof BooleanMessage) {
             return (Formatter.PRIMITIVE + ((BooleanMessage) message).content);
+        } else if (message instanceof IntArrayMessage) {
+            return FormatIntArray(((IntArrayMessage) message).content);
         }
 
+
+
         return "";
+    }
+    private static String FormatIntArray(int [] array) {
+        String result = Formatter.PRIMITIVES_ARRAY + "{";
+        for (int i = 0; i < array.length - 1; i++) {
+            result += array[i] + ", ";
+        }
+        return result + array[array.length-1] + "}";
     }
 }

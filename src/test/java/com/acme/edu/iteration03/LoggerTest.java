@@ -25,11 +25,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     /*
     TODO: implement Logger solution to match specification as tests
-    ///
+    */
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
+        Logger.close();
         //endregion
 
         //region then

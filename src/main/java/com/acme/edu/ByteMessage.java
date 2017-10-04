@@ -12,22 +12,12 @@ public class ByteMessage implements MetaMessage {
     public ByteMessage (byte message) {
         this.prevContent = this.content;
         this.content = message;
-
-        //System.out.println("prev.content" + this.prevContent);
-    }
-    public void setContent(int message) {
-        this.content = message;
-    }
-    @Override
-    public String getContent() {
-        return "" + this.content;
     }
 
     public void filter(MetaMessage message) {
         if(!(message instanceof ByteMessage)) {
             this.flushBuffer();
             message.filter(message);
-            //System.out.println(Formatter.getFormatMessage(message));
             return;
         }
         if(message == this) {
@@ -36,14 +26,11 @@ public class ByteMessage implements MetaMessage {
             return;
         }
         System.out.println(Formatter.getFormatMessage(message));
-        //System.out.print("PrevMSG:" + this.content + " MSG:" + ((ByteMessage)message).content + " ");
         this.numBorder = this.sum < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         this.coefficient = this.sum < 0 ? -1 : 1;
         summOverflow(((ByteMessage)message).content, this.numBorder);
         ((ByteMessage) message).sum = this.sum;
         ((ByteMessage) message).countBorderVal = this.countBorderVal;
-
-        //System.out.println("summ = " + ((ByteMessage) message).content + System.lineSeparator() + "numBorder: " + this.countBorderVal);
     }
 
     public void flushBuffer() {

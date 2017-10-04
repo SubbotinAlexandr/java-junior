@@ -16,14 +16,6 @@ public class IntMessage implements MetaMessage {
 
         //System.out.println("prev.content" + this.prevContent);
     }
-    public void setContent(int message) {
-        this.content = message;
-    }
-    @Override
-    public String getContent() {
-        return "" + this.content;
-    }
-
     public void filter(MetaMessage message) {
         if(!(message instanceof IntMessage)) {
             this.flushBuffer();
