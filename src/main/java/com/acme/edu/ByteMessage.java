@@ -13,7 +13,7 @@ public class ByteMessage implements MetaMessage {
         this.prevContent = this.content;
         this.content = message;
     }
-
+    @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof ByteMessage)) {
             this.flushBuffer();
@@ -21,26 +21,26 @@ public class ByteMessage implements MetaMessage {
             return;
         }
         if(message == this) {
-            System.out.println(Formatter.getFormatMessage(message));
+            printer.print(Formatter.getFormatMessage(message));
             ((ByteMessage) message).sum = this.content;
             return;
         }
-        System.out.println(Formatter.getFormatMessage(message));
+        printer.print(Formatter.getFormatMessage(message));
         this.numBorder = this.sum < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         this.coefficient = this.sum < 0 ? -1 : 1;
         summOverflow(((ByteMessage)message).content, this.numBorder);
         ((ByteMessage) message).sum = this.sum;
         ((ByteMessage) message).countBorderVal = this.countBorderVal;
     }
-
+    @Override
     public void flushBuffer() {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;
         this.numBorder = this.countBorderVal < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         while (this.countBorderVal!=0) {
-            System.out.println(this.numBorder);
+            printer.print("" + this.numBorder);
             this.countBorderVal += this.coefficient;
         }
-        System.out.println(this.sum);
+        printer.print("" + this.sum);
     }
 
     private void summOverflow (int message, int BORDER_VALUE) {

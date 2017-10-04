@@ -5,10 +5,7 @@ public class IntArrayMessage implements MetaMessage {
     public IntArrayMessage(int[] message) {
             content = message;
     }
-
-    public String getContent() {
-        return "";
-    }
+    @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof IntArrayMessage)) {
             this.flushBuffer();
@@ -18,7 +15,8 @@ public class IntArrayMessage implements MetaMessage {
             this.flushBuffer();
         }
     }
+    @Override
     public void flushBuffer() {
-        System.out.println(Formatter.getFormatMessage(this));
+        printer.print(Formatter.getFormatMessage(this));
     }
 }

@@ -5,17 +5,17 @@ public class BooleanMessage implements MetaMessage {
     public BooleanMessage(boolean message) {
         this.content = message;
     }
-
+    @Override
     public void filter(MetaMessage message) {
         if(!(message instanceof BooleanMessage)) {
             this.flushBuffer();
             message.filter(message);
-            return;
         } else if (message != this) {
             this.flushBuffer();
         }
     }
+    @Override
     public void flushBuffer() {
-        System.out.println(Formatter.getFormatMessage(this));
+        printer.print(Formatter.getFormatMessage(this));
     }
 }
