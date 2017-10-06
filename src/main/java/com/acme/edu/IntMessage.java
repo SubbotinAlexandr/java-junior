@@ -42,7 +42,7 @@ public class IntMessage implements MetaMessage {
         this.numBorder = this.countBorderVal < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         while (this.countBorderVal!=0) {
             printer.print("" + this.numBorder);
-            this.countBorderVal += this.coefficient;
+            this.countBorderVal -= this.coefficient;
         }
         printer.print("" + this.sum);
     }
