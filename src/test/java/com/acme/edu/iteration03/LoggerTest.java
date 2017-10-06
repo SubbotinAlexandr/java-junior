@@ -1,6 +1,7 @@
 package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
+import com.acme.edu.NullMessageException;
 import com.acme.edu.PrintException;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -27,7 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     TODO: implement Logger solution to match specification as tests
     */
     @Test
-    public void shouldLogIntegersArray() throws IOException, PrintException {
+    public void shouldLogIntegersArray() throws IOException, PrintException, NullMessageException {
         //region when
         Logger.log(new int[] {-1, 0, 1});
         Logger.close();

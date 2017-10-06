@@ -1,6 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
+import com.acme.edu.NullMessageException;
 import com.acme.edu.PrintException;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
@@ -23,7 +24,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
     @Test
-    public void shouldLogInteger() throws IOException, PrintException {
+    public void shouldLogInteger() throws IOException, PrintException, NullMessageException {
         //region when
         Logger.log(1);
         Logger.log(0);
@@ -39,7 +40,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
         @Test
-        public void shouldLogByte() throws IOException, PrintException {
+        public void shouldLogByte() throws IOException, PrintException, NullMessageException {
             //region when
             Logger.log((byte)1);
             Logger.log((byte)0);
@@ -58,7 +59,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          TODO: implement Logger solution to match specification as tests
          */
          @Test
-         public void shouldLogChar() throws IOException, PrintException {
+         public void shouldLogChar() throws IOException, PrintException, NullMessageException {
              //region when
              Logger.log('a');
              Logger.log('b');
@@ -72,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          }
 
          @Test
-         public void shouldLogString() throws IOException, PrintException {
+         public void shouldLogString() throws IOException, PrintException, NullMessageException {
              //region when
              Logger.log("test string 1");
              Logger.log("other str");
@@ -87,10 +88,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          }
 
          @Test
-         public void shouldLogBoolean() throws IOException, PrintException {
+         public void shouldLogBoolean() throws IOException, PrintException, NullMessageException {
              //region when
              Logger.log(true);
              Logger.log(false);
+//             Logger.log();
              Logger.close();
              //endregion
 

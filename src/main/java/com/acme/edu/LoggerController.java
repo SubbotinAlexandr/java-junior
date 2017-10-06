@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import java.io.IOException;
+
 /**
  * Класс LoggerController выполняет функцию контроллера, его задача сводится к функции processMessage - к проверке:
  *  Если сообщение появилось первый раз и до него не было никаких сообщений, тогда мы запускаем фильтрацию сообщения самому от себя
@@ -10,7 +12,7 @@ package com.acme.edu;
 public class LoggerController {
     private MetaMessage message;
 
-    public void processMessage(MetaMessage message) throws PrintException {
+    public void processMessage(MetaMessage message) throws PrintException, NullMessageException {
         try {
             if(this.message == null && message != null) {
                     message.filter(message);
@@ -24,11 +26,11 @@ public class LoggerController {
         this.message = message;
     }
 
-    public void flushBuffer () throws PrintException {
-        try {
+    public void flushBuffer () throws PrintException, IOException {
+        //try {
             this.message.flushBuffer();
-        } catch (Exception e) {
-            throw new PrintException("Не удалось вывести сообщение", e);
-        }
+        //} catch (Exception e) {
+        //    throw new PrintException("Не удалось вывести сообщение", e);
+        //}
     }
 }
