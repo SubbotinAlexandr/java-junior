@@ -75,9 +75,4 @@ public class IntMessage implements MetaMessage {
             return false;
         }
     }
-
-    private static int getCoefficientBySign(int number) {
-        return number < 0 ? -1 : 1;
-    }
-
 }

@@ -26,11 +26,11 @@ public class LoggerController {
         this.message = message;
     }
 
-    public void flushBuffer () throws PrintException, IOException {
-        //try {
+    public void flushBuffer () throws PrintException {
+        try {
             this.message.flushBuffer();
-        //} catch (Exception e) {
-        //    throw new PrintException("Не удалось вывести сообщение", e);
-        //}
+        } catch (Exception e) {
+            throw new PrintException("Не удалось вывести сообщение", e);
+        }
     }
 }

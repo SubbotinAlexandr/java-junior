@@ -10,5 +10,5 @@ import java.io.IOException;
 public interface MetaMessage {
     Printer printer = new ConsolePrinter();
     void filter(MetaMessage message) throws PrintException;
-    void flushBuffer() throws PrintException, IOException;
+    void flushBuffer() throws PrintException;
 }

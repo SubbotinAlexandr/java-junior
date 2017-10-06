@@ -2,14 +2,13 @@ package com.acme.edu;
 
 public class ByteMessage implements MetaMessage {
     int content;
-    int prevContent;
-    int coefficient;
-    int countBorderVal;
-    int numBorder;
-    int sum;
+    private int sum;
+    private int coefficient;
+    private int countBorderVal;
+    private int numBorder;
+
 
     public ByteMessage (byte message) {
-        this.prevContent = this.content;
         this.content = message;
     }
 

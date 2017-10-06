@@ -44,7 +44,7 @@ public class Logger {
 //            throw new NullMessageException("Illegal argument: message", new IllegalArgumentException());
 //    }
 
-    public static void close() throws PrintException, IOException {
+    public static void close() throws PrintException, NullMessageException {
         controller.flushBuffer();
     }
 }

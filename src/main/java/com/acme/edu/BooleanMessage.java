@@ -14,21 +14,21 @@ public class BooleanMessage implements MetaMessage {
         if(!(message instanceof BooleanMessage)) {
             try {
                 this.flushBuffer();
-            } catch (IOException e) {
+            } catch (PrintException e) {
                 e.printStackTrace();
             }
             message.filter(message);
         } else if (message != this) {
             try {
                 this.flushBuffer();
-            } catch (IOException e) {
+            } catch (PrintException e) {
                 e.printStackTrace();
             }
         }
     }
 
     @Override
-    public void flushBuffer() throws PrintException, IOException {
+    public void flushBuffer() throws PrintException {
         printer.print(Formatter.getFormatMessage(this));
     }
 }
