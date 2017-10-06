@@ -1,7 +1,7 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Logger;
-import com.acme.edu.ProcedureLogger;
+import com.acme.edu.PrintException;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
     @Test
-    public void shouldLogInteger() throws IOException {
+    public void shouldLogInteger() throws IOException, PrintException {
         //region when
         Logger.log(1);
         Logger.log(0);
@@ -39,7 +39,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
         @Test
-        public void shouldLogByte() throws IOException {
+        public void shouldLogByte() throws IOException, PrintException {
             //region when
             Logger.log((byte)1);
             Logger.log((byte)0);
@@ -58,7 +58,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          TODO: implement Logger solution to match specification as tests
          */
          @Test
-         public void shouldLogChar() throws IOException {
+         public void shouldLogChar() throws IOException, PrintException {
              //region when
              Logger.log('a');
              Logger.log('b');
@@ -72,7 +72,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          }
 
          @Test
-         public void shouldLogString() throws IOException {
+         public void shouldLogString() throws IOException, PrintException {
              //region when
              Logger.log("test string 1");
              Logger.log("other str");
@@ -87,7 +87,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
          }
 
          @Test
-         public void shouldLogBoolean() throws IOException {
+         public void shouldLogBoolean() throws IOException, PrintException {
              //region when
              Logger.log(true);
              Logger.log(false);

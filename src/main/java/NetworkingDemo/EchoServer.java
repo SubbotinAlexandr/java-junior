@@ -12,11 +12,8 @@ public class EchoServer {
         try (ServerSocket listener = new ServerSocket(9999)) {
             while(true) {
                 Socket client = listener.accept();      //ждем клиентский сокет
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {                      //Используем Thread
-                        clientLoop(client);
-                    }
+                new Thread(() -> {                      //Используем Thread
+                    clientLoop(client);
                 }).start(); // запускаем анонимную функцию в ните
 
             }

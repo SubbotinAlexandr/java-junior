@@ -14,7 +14,7 @@ public class ByteMessage implements MetaMessage {
     }
 
     @Override
-    public void filter(MetaMessage message) {
+    public void filter(MetaMessage message) throws PrintException {
         if(!(message instanceof ByteMessage)) {
             this.flushBuffer();
             message.filter(message);
@@ -34,7 +34,7 @@ public class ByteMessage implements MetaMessage {
     }
 
     @Override
-    public void flushBuffer() {
+    public void flushBuffer() throws PrintException {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;
         this.numBorder = this.countBorderVal < 0 ? Byte.MIN_VALUE : Byte.MAX_VALUE;
         while (this.countBorderVal!=0) {

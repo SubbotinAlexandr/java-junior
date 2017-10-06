@@ -10,17 +10,25 @@ package com.acme.edu;
 public class LoggerController {
     private MetaMessage message;
 
-    public void processMessage(MetaMessage message) {
-        if(this.message == null && message != null) {
-            message.filter(message);
-        }
-        if (message != null && this.message != null) {
-            this.message.filter(message);
+    public void processMessage(MetaMessage message) throws PrintException {
+        try {
+            if(this.message == null && message != null) {
+                    message.filter(message);
+            }
+            if (message != null && this.message != null) {
+                this.message.filter(message);
+            }
+        } catch (Exception e) {
+            throw new PrintException("Не удалось вывести сообщение, посколько возникла ошибка при выводе!", e);
         }
         this.message = message;
     }
 
-    public void flushBuffer () {
-        this.message.flushBuffer();
+    public void flushBuffer () throws PrintException {
+        try {
+            this.message.flushBuffer();
+        } catch (Exception e) {
+            throw new PrintException("Не удалось вывести сообщение", e);
+        }
     }
 }

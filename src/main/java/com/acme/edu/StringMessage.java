@@ -9,7 +9,7 @@ public class StringMessage implements MetaMessage {
         this.content = message;
     }
 
-    public void filter(MetaMessage message) {
+    public void filter(MetaMessage message) throws PrintException {
         if(!(message instanceof StringMessage)) {
             this.flushBuffer();
             message.filter(message);
@@ -23,7 +23,7 @@ public class StringMessage implements MetaMessage {
         }
     }
 
-    public void flushBuffer() {
+    public void flushBuffer() throws PrintException {
         printer.print(Formatter.getFormatMessage(this));
     }
 }

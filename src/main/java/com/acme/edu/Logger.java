@@ -13,30 +13,30 @@ package com.acme.edu;
  */
 public class Logger {
     private static LoggerController controller = new LoggerController();
-    public static void log(int message) {
+    public static void log(int message) throws PrintException {
         controller.processMessage(new IntMessage(message));
     }
-    public static void log(byte message) {
+    public static void log(byte message) throws PrintException {
         controller.processMessage(new ByteMessage(message));
     }
 
-    public static void log(char message) {
+    public static void log(char message) throws PrintException {
         controller.processMessage(new CharMessage(message));
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws PrintException {
         controller.processMessage(new StringMessage(message));
     }
 
-    public static void log(Boolean message) {
+    public static void log(Boolean message) throws PrintException {
         controller.processMessage(new BooleanMessage(message));
     }
 
-    public static void log(int[] message) {
+    public static void log(int[] message) throws PrintException {
         controller.processMessage(new IntArrayMessage(message));
     }
 
-    public static void close() {
+    public static void close() throws PrintException {
         controller.flushBuffer();
     }
 }

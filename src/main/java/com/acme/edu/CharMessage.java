@@ -8,7 +8,7 @@ public class CharMessage implements MetaMessage {
     }
 
     @Override
-    public void filter(MetaMessage message) {
+    public void filter(MetaMessage message) throws PrintException {
         if(!(message instanceof CharMessage)) {
             this.flushBuffer();
             printer.print(Formatter.getFormatMessage(message));

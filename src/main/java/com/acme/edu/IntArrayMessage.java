@@ -8,7 +8,7 @@ public class IntArrayMessage implements MetaMessage {
     }
 
     @Override
-    public void filter(MetaMessage message) {
+    public void filter(MetaMessage message) throws PrintException {
         if(!(message instanceof IntArrayMessage)) {
             this.flushBuffer();
             message.filter(message);
@@ -19,7 +19,7 @@ public class IntArrayMessage implements MetaMessage {
     }
 
     @Override
-    public void flushBuffer() {
+    public void flushBuffer() throws PrintException {
         printer.print(Formatter.getFormatMessage(this));
     }
 }

@@ -17,7 +17,7 @@ public class IntMessage implements MetaMessage {
     }
 
     @Override
-    public void filter(MetaMessage message) {
+    public void filter(MetaMessage message) throws PrintException {
         if (!(message instanceof IntMessage)) {
             this.flushBuffer();
             message.filter(message);
@@ -37,7 +37,7 @@ public class IntMessage implements MetaMessage {
     }
 
     @Override
-    public void flushBuffer() {
+    public void flushBuffer() throws PrintException {
         this.coefficient = this.countBorderVal < 0 ?  1 : -1;
         this.numBorder = this.countBorderVal < 0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         while (this.countBorderVal!=0) {
